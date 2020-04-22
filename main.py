@@ -12,7 +12,7 @@ try:
     create_table_query = '''CREATE TABLE grs
           (grid BIGINT,
           userid BIGINT,
-          kanal LONGTEXT); '''
+          kanal TEXT); '''
     
     cursor.execute(create_table_query)
     connection.commit()
