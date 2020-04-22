@@ -78,7 +78,7 @@ def lalala(message):
     if message.chat.type == 'private':
         if message.text == "Go":
             bot.send_message(message.chat.id, "Siz deaderuz kanaliga azo emassiz.", reply_markup=next_kb)
-        elif message.text == 'Davom etish':
+        elif message.text == 'davom etish':
             button_next2 = types.KeyboardButton("Ok")
             next_kb2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
             next_kb2.add(button_next2)
