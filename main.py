@@ -19,7 +19,7 @@ restricted_messages = ["zzz", "zver"]
 @bot.message_handler(commands=['add'])
 def adddata(message):
     with connection.cursor() as cursor:
-        sql = "INSERT INTO `grs` (`grid`, `userid`, `kanal`) VALUES (%s, %s, %s)"
+        sql = "INSERT INTO grs (grid, userid, kanal) VALUES (%s, %s, %s)"
         cursor.execute(sql, (message.chat.id,message.from_user.id,''))
         bot.send_message(message.chat.id, "Bazaga yozildi")
 
