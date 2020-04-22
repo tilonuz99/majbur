@@ -10,7 +10,7 @@ database = "d7tofl99vg7pq2"
 
 connection = psycopg2.connect(user = "thzrixmbpxycue",
                                   password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c",
-                                  host = "ec2-54-210-128-153.compute-1.amazonaws.com"
+                                  host = "ec2-54-210-128-153.compute-1.amazonaws.com",
                                   database = "d7tofl99vg7pq2")
 
 bot = telebot.TeleBot("931190511:AAEuhHmrIiN5Lc_lNQq-ANjeauytWH2i5Gc")
