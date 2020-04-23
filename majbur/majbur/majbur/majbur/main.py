@@ -25,10 +25,11 @@ def adddata(message):
         cursor.execute(havee)
         resultt = cursor.fetchall()
         for x in resultt:
-            msg += "{}\n".format(x[0])
+            msg += "{}".format(x[0])
         if msg not in message.from_user.id:
             cursor.execute(sql, (message.chat.id,message.from_user.id,''))
-            bot.send_message(message.chat.id, "Bazaga yozildi" + resultt)
+            bot.send_message(message.chat.id, "Bazaga yozildi")
+            bot.send_message(message.chat.id, msg)
         else:
             bot.send_message(message.chat.id, "Avvaldan bormisiz")
 
