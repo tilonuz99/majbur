@@ -4,7 +4,7 @@ from telebot import types
 import psycopg2
 
 def newuser(message):
-    
+    message = int(message)
     connection = psycopg2.connect(user = "thzrixmbpxycue",
                                   password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c",
                                   host = "ec2-54-210-128-153.compute-1.amazonaws.com",
@@ -13,13 +13,12 @@ def newuser(message):
     sql_select_query = "select * from grs"
     cursor.execute(sql_select_query)
     record = cursor.fetchall()
-    fromid = message.from_user.id
-    if record not in fromid:
+    if message.from_user.id not in record:
         sql_update_query = """INSERT INTO grs (grid, userid, kanal) VALUES (%s, %s, %s)"""
-        cursor.execute(sql_update_query, (fromid,fromid,''))
-        bot.send_message(fromid, "Bazaga yozildi")
+        cursor.execute(sql_update_query, (message.chat.id,message.from_user.id,''))
+        bot.send_message(message.chat.id, "Bazaga yozildi")
     else:
-        bot.send_message(fromid, "avvaldan borsiz")
+        bot.send_message(message.chat.id, "avvaldan borsiz")
     
     connection.commit()
 
@@ -38,8 +37,7 @@ restricted_messages = ["zzz", "zver"]
 
 @bot.message_handler(commands=['add'])
 def addata(message):
-    xabar = str(message)
-    newuser(xabar)
+    newuser(message)
 
 @bot.message_handler(commands=['getdata'])
 def getdata(message):
