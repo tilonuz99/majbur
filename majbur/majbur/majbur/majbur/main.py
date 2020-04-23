@@ -27,20 +27,20 @@ def adddata(message):
             cursor.execute(sql, (message.chat.id,message.from_user.id,''))
             bot.send_message(message.chat.id, "Bazaga yozildi" + resultt)
         else:
-             bot.send_message(message.chat.id, "Avvaldan bormisiz")
+            bot.send_message(message.chat.id, "Avvaldan bormisiz")
 
 @bot.message_handler(commands=['getdata'])
 def getdata(message):
-        msg = ""
-        cursorr = connection.cursor()
-        sql = "SELECT * FROM grs"
-        cursorr.execute(sql)
-        resultt = cursorr.fetchall()
-        if resultt is None:
-            bot.send_message(message.chat.id, "hech narsa yoq")
-        else:
-            for x in resultt:
-                msg += "{}\n".format(x[0])
+    msg = ""
+    cursorr = connection.cursor()
+    sql = "SELECT * FROM grs"
+    cursorr.execute(sql)
+    resultt = cursorr.fetchall()
+    if resultt is None:
+        bot.send_message(message.chat.id, "hech narsa yoq")
+    else:
+        for x in resultt:
+            msg += "{}\n".format(x[0])
         bot.send_message(message.chat.id, msg)
 
 @bot.inline_handler(lambda query: query.query == "Telegram")
