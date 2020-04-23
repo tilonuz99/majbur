@@ -13,7 +13,7 @@ def newuser(message):
     sql_select_query = "select * from grs"
     cursor.execute(sql_select_query)
     record = cursor.fetchall()
-    fromid = str(message.from_user.id)
+    fromid = message.from_user.id
     if record not in fromid:
         sql_update_query = """INSERT INTO grs (grid, userid, kanal) VALUES (%s, %s, %s)"""
         cursor.execute(sql_update_query, (fromid,fromid,''))
