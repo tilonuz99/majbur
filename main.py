@@ -13,12 +13,13 @@ def newuser(message):
     sql_select_query = "select * from grs"
     cursor.execute(sql_select_query)
     record = cursor.fetchall()
-    if record not in message.from_user.id:
+    fromid = str(message.from_user.id)
+    if record not in fromid:
         sql_update_query = """INSERT INTO grs (grid, userid, kanal) VALUES (%s, %s, %s)"""
-        cursor.execute(sql_update_query, (message.chat.id,message.from_user.id,''))
-        bot.send_message(message.chat.id, "Bazaga yozildi")
+        cursor.execute(sql_update_query, (fromid,fromid,''))
+        bot.send_message(fromid, "Bazaga yozildi")
     else:
-        bot.send_message(message.chat.id, "avvaldan borsiz")
+        bot.send_message(fromid, "avvaldan borsiz")
     
     connection.commit()
 
