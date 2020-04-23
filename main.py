@@ -33,7 +33,8 @@ def newuser(message):
     record = cursor.fetchall()
     for x in record:
         msg += "{}\n".format(x[0])
-    if message.from_user.id not in msg:
+        fromid = str(message.from_user.id)
+    if  fromid not in msg:
         sql_update_query = """INSERT INTO grs (grid, userid, kanal) VALUES (%s, %s, %s)"""
         cursor.execute(sql_update_query, (message.chat.id,message.from_user.id,''))
         bot.send_message(message.chat.id, "Bazaga yozildi")
