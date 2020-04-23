@@ -3,6 +3,23 @@ import time
 from telebot import types
 import psycopg2
 
+def getdata(message):
+    connection = psycopg2.connect(user = "thzrixmbpxycue",
+                                  password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c",
+                                  host = "ec2-54-210-128-153.compute-1.amazonaws.com",
+                                  database = "d7tofl99vg7pq2")
+    msg = ""
+    cursorr = connection.cursor()
+    sql = "SELECT * FROM grs"
+    cursorr.execute(sql)
+    resultt = cursorr.fetchall()
+    if resultt is None:
+        bot.send_message(message.chat.id, "hech  narsa yoq")
+    else:
+        for x in resultt:
+            msg += "{}\n".format(x[0])
+            bot.send_message(message.chat.id, msg)
+            
 def newuser(message):
     connection = psycopg2.connect(user = "thzrixmbpxycue",
                                   password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c",
@@ -26,11 +43,6 @@ password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c"
 hostname = "gdt"
 database = "d7tofl99vg7pq2"
 
-connection = psycopg2.connect(user = "thzrixmbpxycue",
-                                  password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c",
-                                  host = "ec2-54-210-128-153.compute-1.amazonaws.com",
-                                  database = "d7tofl99vg7pq2")
-
 bot = telebot.TeleBot("931190511:AAEuhHmrIiN5Lc_lNQq-ANjeauytWH2i5Gc")
 restricted_messages = ["zzz", "zver"]
 
@@ -39,18 +51,8 @@ def addata(message):
     newuser(message)
 
 @bot.message_handler(commands=['getdata'])
-def getdata(message):
-    msg = ""
-    cursorr = connection.cursor()
-    sql = "SELECT * FROM grs"
-    cursorr.execute(sql)
-    resultt = cursorr.fetchall()
-    if resultt is None:
-        bot.send_message(message.chat.id, "hech narsa yoq")
-    else:
-        for x in resultt:
-            msg += "{}\n".format(x[0])
-        bot.send_message(message.chat.id, msg)
+def gett(message):
+    getdata(message)
 
 @bot.inline_handler(lambda query: query.query == "Telegram")
 def query_text(inline_query):
