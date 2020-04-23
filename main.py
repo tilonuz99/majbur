@@ -4,6 +4,7 @@ from telebot import types
 import psycopg2
 
 def newuser(message):
+    message = int(message)
     connection = psycopg2.connect(user = "thzrixmbpxycue",
                                   password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c",
                                   host = "ec2-54-210-128-153.compute-1.amazonaws.com",
@@ -35,8 +36,7 @@ bot = telebot.TeleBot("931190511:AAEuhHmrIiN5Lc_lNQq-ANjeauytWH2i5Gc")
 restricted_messages = ["zzz", "zver"]
 
 @bot.message_handler(commands=['add'])
-
-def adddata(message):
+def addata(message):
     newuser(message)
 
 @bot.message_handler(commands=['getdata'])
