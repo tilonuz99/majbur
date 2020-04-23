@@ -19,18 +19,15 @@ restricted_messages = ["zzz", "zver"]
 @bot.message_handler(commands=['add'])
 
 def adddata(message):
-    msg = ""
     with connection.cursor() as cursor:
         havee = "SELECT * FROM grs"
         cursor.execute(havee)
         resultt = cursor.fetchall()
-        for x in resultt:
-            msg += "{}".format(x[0])
-        if msg not in message.from_user.id:
+        if resultt not in message.from_user.id:
             sql = "INSERT INTO grs (grid, userid, kanal) VALUES (%s, %s, %s)"
             cursor.execute(sql, (message.chat.id,message.from_user.id,''))
             bot.send_message(message.chat.id, "Bazaga yozildi")
-            bot.send_message(message.chat.id, msg)
+            bot.send_message(message.chat.id, resultt)
         else:
             bot.send_message(message.chat.id, "Avvaldan bormisiz")
 
@@ -41,7 +38,7 @@ def getdata(message):
     sql = "SELECT * FROM grs"
     cursorr.execute(sql)
     resultt = cursorr.fetchall()
-    if resultt is not None:
+    if resultt is None:
         bot.send_message(message.chat.id, "hech narsa yoq")
     else:
         for x in resultt:
