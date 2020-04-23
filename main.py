@@ -13,23 +13,27 @@ def getdata(message):
     sql = "SELECT * FROM grs"
     cursorr.execute(sql)
     resultt = cursorr.fetchall()
-    if resultt is None:
+    for x in resultt:
+        msg += "{}\n".format(x[0])
+    if msg is None:
         bot.send_message(message.chat.id, "hech  narsa yoq")
     else:
-        for x in resultt:
-            msg += "{}\n".format(x[0])
-            bot.send_message(message.chat.id, msg)
+        bot.send_message(message.chat.id, msg)
             
 def newuser(message):
     connection = psycopg2.connect(user = "thzrixmbpxycue",
                                   password = "7184838441baf33aa0986afeca61e726ab610163a77c357087e3e826fc71fc5c",
                                   host = "ec2-54-210-128-153.compute-1.amazonaws.com",
                                   database = "d7tofl99vg7pq2")
+     
+    msg = ""
     cursor = connection.cursor()
     sql_select_query = "SELECT * FROM grs"
     cursor.execute(sql_select_query)
     record = cursor.fetchall()
-    if message.from_user.id not in record:
+    for x in record:
+        msg += "{}\n".format(x[0])
+    if message.from_user.id not in msg:
         sql_update_query = """INSERT INTO grs (grid, userid, kanal) VALUES (%s, %s, %s)"""
         cursor.execute(sql_update_query, (message.chat.id,message.from_user.id,''))
         bot.send_message(message.chat.id, "Bazaga yozildi")
