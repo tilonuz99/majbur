@@ -9,7 +9,7 @@ def newuser(message):
                                   host = "ec2-54-210-128-153.compute-1.amazonaws.com",
                                   database = "d7tofl99vg7pq2")
     cursor = connection.cursor()
-    sql_select_query = "select * from grs"
+    sql_select_query = "SELECT * FROM grs"
     cursor.execute(sql_select_query)
     record = cursor.fetchall()
     if message.from_user.id not in record:
