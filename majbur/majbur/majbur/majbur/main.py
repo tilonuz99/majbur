@@ -17,9 +17,10 @@ bot = telebot.TeleBot("931190511:AAEuhHmrIiN5Lc_lNQq-ANjeauytWH2i5Gc")
 restricted_messages = ["zzz", "zver"]
 
 @bot.message_handler(commands=['add'])
+
 def adddata(message):
+    msg = ""
     with connection.cursor() as cursor:
-        msg = ""
         havee = "SELECT * FROM grs"
         cursor.execute(havee)
         resultt = cursor.fetchall()
